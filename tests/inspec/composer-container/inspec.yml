@@ -1,0 +1,10 @@
+name: composer-container
+title: Basic Composer Container
+maintainer: solutionDrive GmbH
+copyright: solutionDrive GmbH
+copyright_email: info@solutiondrive.de
+summary: Verifies that a default composer setup exists
+version: 0.1.0
+supports:
+  - os-family: linux
+inspec_version: "~> 3.7"
