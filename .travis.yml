@@ -1,0 +1,31 @@
+sudo: required
+dist: xenial
+language: ruby
+rvm:
+  - 2.3.7
+cache: bundler
+services:
+  - docker
+env:
+  global:
+    - secure: "lyAeo1Jbp6orSvxOv0lI0rqUhilHj5XZzFVSHnBxynQ4dKvSTspzLks9OLgagCvZQP9Bw4OJmajcFolSGsm+9jt7aHH6rVvPC97vqPbP52Oz/XB3sG/aB5uprb+KETYSze/s8iEH5RqEYYEDS0pjUqaqAJAcKCDoAWxea3rKq49WIXNgNF7PUOaVbFdeft8sHr29apFHMkSetcjiTkd9d6wvGDJbBkSe6VY0Mxt48EZ+8R3poWxMAgXtY+HSsX51YBw/6reojszT5XnqBoDiQ5xeyM1+HJlgcUDQM8H9iGNQzXMSVk5zqlCOsUjLscxs3nLWfZAhgdKFdQ/RWoJZQNgQjeNVbtqK5aAOQDbbgbu1lO/+Kdkt05HAYybObRQb6yHrYHwwFJPJqwJ3wNFOL4blubljzFZOUDtRLhxIjWCN5aTohPkYdAlamaXlC3Xt/XhG2H/K/dSlMDZ2ZdsNEctAUVEzO9wPF+VMNjuEemT0G/LYfs6hu+BzvtJGEpe9lSvT5wzHuWOLeS+GzevHGpOBik8p0lUVtbvKNBkCfQAZ4ut5lZaOGU1hU4/2mpS2htxCC/ttIXlTtE2BY7EUUgRJ45wnJ9PfhW7hdUySxQdModhjRguL12B/cVSZsf5r4/iG3hM6g81es+1nI28cJ9lWg+p78uwB7Xg+zsefh8w="
+    - secure: "N7+ZDVHTY5EOQOSPV9eQSeC8UUtrj6ppNflkdCZ3S14Z8RrC6mM6nRgUGQ1qRMSQ8eH4NSMKhxFM+zbnmuERt8VkI1Q3G6YAI0KBgYXOrv1a3nMqAiiQs9smT2QixOcZ0ip7zGTIwFmEO1y3VxMH2nZDdkGBG0R6aIYPjCOvlyH/CMHOTUkSSZikFReYgGs2Xv2taHI91saTn5i1BVYE5UJmP1Z9bjE4AuhjWjewJnTa614pajYVv1LpkQosRxC3baRMS7i0lloLywzo0tJ9EP1uyq1mLSN2t6CJpsvogV1jmy0XEkbsMJCnSdmWNITpMgDzaARYJzEGGW9AuzsairmKdqMK09JtDr/zrJvfR9k/5/rRSC8QcAQXbl6pRzODvNZGEz5pYBZzEVsxtny4LTQZMEtuxjBl3IszU6lB2LSOq6MgFZi92SktMjxHFID/3Z4IbcwwwMVae9P8G8cZ/5Xk5LSIrxEyFEjkkKEAWVBU3HkYXgomgOsm0czFvIDPxvWPl4PndjGReFYXqfkBLQlCJZFt+STpyrrNnFiybub4+LLBwJxJ5NnYBg246kNJ7w4ESxajocnPHjYi6mgrMraxKsMmaFNeZHOCJ1ySOJAJFiLwX2rb4tr9ZC4doUkD+5kTmqfZyd10sCuNU8sIqRUYgw+u2//bDT/UGoADez0="
+
+  matrix:
+  - LATEST=0 PHP_VERSION=7.3 COMPOSER_VERSION=1.6.4
+  - LATEST=1 PHP_VERSION=7.2 COMPOSER_VERSION=1.6.4
+  - LATEST=0 PHP_VERSION=7.1 COMPOSER_VERSION=1.6.4
+  - LATEST=0 PHP_VERSION=7.0 COMPOSER_VERSION=1.6.4
+  - LATEST=0 PHP_VERSION=5.6 COMPOSER_VERSION=1.6.4
+script:
+  - bash docker-build.sh
+  - bash docker-test.sh
+before_deploy:
+  - docker images
+deploy:
+  provider: script
+  script: bash docker-push.sh
+  on:
+    branch: master
+after_script:
+  - docker images

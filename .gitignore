@@ -1,0 +1,6 @@
+### inspec
+tests/inspec/composer-container/inspec.lock
+tests/inspec/composer-container/attributes.yml
+.bundle/
+Gemfile.lock
+vendor/
