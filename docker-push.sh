@@ -4,3 +4,4 @@ set -e
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker push solutiondrive/docker-composer-container
+docker push solutiondrive/php-composer
