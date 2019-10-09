@@ -1,7 +1,7 @@
 ARG PHP_VERSION
 ARG COMPOSER_VERSION
 
-FROM solutiondrive/docker-php-container:php$PHP_VERSION
+FROM solutiondrive/php:php$PHP_VERSION
 
 ARG COMPOSER_VERSION
 
