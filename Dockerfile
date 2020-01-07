@@ -9,6 +9,8 @@ ENV PATH "/composer/vendor/bin:$PATH"
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 
+COPY config/memory-limit.ini $PHP_INI_DIR/conf.d/
+
 RUN apk add --no-cache \
     tini \
     patch
