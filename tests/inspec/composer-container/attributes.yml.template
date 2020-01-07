@@ -1,1 +1,2 @@
 composer_version: {{ composer_version }}
+php_version: {{ php_version }}
