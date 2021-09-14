@@ -77,4 +77,9 @@ jobs:
         run: docker images
         shell: bash
 
-      # TODO: Push only on master
+      - name: Push images
+        run: ./docker-push.sh
+        shell: bash
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
