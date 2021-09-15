@@ -8,6 +8,10 @@ cp ${ATTRIBUTES_TEMPLATE_FILE} ${ATTRIBUTES_FILE}
 printf '%s\n' ",s~{{ composer_version }}~${COMPOSER_VERSION}~g" w q | ed -s "${ATTRIBUTES_FILE}"
 printf '%s\n' ",s~{{ php_version }}~${PHP_VERSION}~g" w q | ed -s "${ATTRIBUTES_FILE}"
 
-DOCKER_CONTAINER_ID=`docker run -d solutiondrive/docker-composer-container:php$PHP_VERSION`
+if [ "$COMPOSER2" = "1" ]; then
+  DOCKER_CONTAINER_ID=`docker run -d solutiondrive/docker-composer2-container:php$PHP_VERSION`
+else
+  DOCKER_CONTAINER_ID=`docker run -d solutiondrive/docker-composer-container:php$PHP_VERSION`
+fi
 bundle exec inspec exec tests/inspec/composer-container --attrs tests/inspec/composer-container/attributes.yml -t docker://${DOCKER_CONTAINER_ID}
 docker stop ${DOCKER_CONTAINER_ID}
