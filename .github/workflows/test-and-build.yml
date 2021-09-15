@@ -34,6 +34,11 @@ jobs:
             composer2: 0
             latest: 1
             experimental: false
+          - php-version: "8.0"
+            composer-version: "1.10.22"
+            composer2: 0
+            latest: 1
+            experimental: true
           - php-version: "7.4"
             composer-version: "2.1.6"
             composer2: 1
