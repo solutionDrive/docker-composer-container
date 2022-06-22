@@ -28,6 +28,6 @@ control 'php' do
     describe command('php -i | grep memory_limit') do
         its('exit_status') { should eq 0 }
         its('stdout') { should include 'memory_limit'}
-        its('stdout') { should include '1536M' }
+        its('stdout') { should include '2536M' }
     end
 end
